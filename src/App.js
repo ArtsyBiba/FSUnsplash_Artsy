@@ -1,29 +1,18 @@
+import React from 'react';
 import Unsplash from 'unsplash-js';
 
-import logo from './logo.svg';
 import './App.css';
+import SearchPhotos from './Components/searchPhotos';
 
-// TODO: Replace "APP_ACCESS_KEY" with your own key, which
-// can be generated here: https://unsplash.com/developers
-const unsplash = new Unsplash({ accessKey: 'APP_ACCESS_KEY' });
+const unsplash = new Unsplash({ accessKey: process.env.UNSPLASH_ACCESS_KEY });
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <div className="container">
+        <h1 className="title">Unsplash Photo Search</h1>
+        <SearchPhotos />
+      </div>
     </div>
   );
 }
