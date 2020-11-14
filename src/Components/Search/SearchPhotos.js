@@ -10,7 +10,7 @@ export default function SearchPhotos() {
     const searchPhotos = async (e) => {
         e.preventDefault();
         unsplash.search
-            .photos(query)
+            .photos(query, 1 , 20)
             .then(toJson)
             .then((json) => {
                 setPics(json.results);
@@ -35,19 +35,19 @@ export default function SearchPhotos() {
                     Search
                 </button>
             </form>
+
             <div className='card-list'>
-                {
-                    pics.map((pic) => 
-                        <div className='card' key={pic.id}>
-                            <img
-                                className='card--image'
-                                alt={pic.alt_description}
-                                src={pic.urls.regular}
-                                width='50%'
-                                height='50%'
-                            ></img>
-                        </div>)
-                }
+                {pics.map((pic) => (
+                    <div className='card' key={pic.id}>
+                        <img
+                            className='card--image'
+                            alt={pic.alt_description}
+                            src={pic.urls.regular}
+                            width='50%'
+                            height='50%'
+                        ></img>
+                    </div>
+                ))}
             </div>
         </>
     );
