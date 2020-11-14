@@ -5,6 +5,7 @@ const unsplash = new Unsplash({ accessKey: process.env.REACT_APP_UNSPLASH_ACCESS
 
 export default function SearchPhotos() {
     const [query, setQuery] = useState('');
+    const [pics, setPics] = useState([]);
 
     const searchPhotos = async (e) => {
         e.preventDefault();
@@ -12,7 +13,7 @@ export default function SearchPhotos() {
             .photos(query)
             .then(toJson)
             .then((json) => {
-                console.log(json);
+                setPics(json.results);
             });
     };
   
@@ -34,6 +35,20 @@ export default function SearchPhotos() {
                     Search
                 </button>
             </form>
+            <div className='card-list'>
+                {
+                    pics.map((pic) => 
+                        <div className='card' key={pic.id}>
+                            <img
+                                className='card--image'
+                                alt={pic.alt_description}
+                                src={pic.urls.regular}
+                                width='50%'
+                                height='50%'
+                            ></img>
+                        </div>)
+                }
+            </div>
         </>
     );
 }
