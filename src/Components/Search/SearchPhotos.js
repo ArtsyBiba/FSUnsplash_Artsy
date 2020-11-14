@@ -16,7 +16,7 @@ export default function SearchPhotos() {
                 setPics(json.results);
             });
     };
-  
+
     return (
         <>
             <form className='form' onSubmit={searchPhotos}> 
@@ -25,6 +25,7 @@ export default function SearchPhotos() {
                 </label>
                 <input
                     type='text'
+                    data-testid='search-input'
                     name='query'
                     className='input'
                     placeholder={`Try "fancy cars" or "cute animals"`}
