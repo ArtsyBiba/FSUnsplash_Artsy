@@ -1,10 +1,10 @@
 import React from 'react';
 
-export default function SearchBar({ query, setQuery, searchPhotos }) {
+export default function SearchBar({ query, setQuery, searchPhotos, searchRandom, randomWord, pics }) {
 
     return (
         <>
-            <form className='form' onSubmit={searchPhotos}> 
+            <div className='search-bar'>
                 <label className='label' htmlFor='query'> 
                     📷
                 </label>
@@ -17,10 +17,19 @@ export default function SearchBar({ query, setQuery, searchPhotos }) {
                     value={query}
                     onChange={(e) => setQuery(e.target.value)}
                 />
-                <button type='submit' className='button'>
+                <button onClick={searchPhotos} className='button'>
                     Search
                 </button>
-            </form>
+                <button onClick={searchRandom} className='random-button'>
+                    Random Search
+                </button>
+            </div>
+            {pics.length < 1 && randomWord &&   
+                <p>No results for "{randomWord}" try again...</p>
+            }
+            {pics.length >= 1 && randomWord &&   
+                <p>Search results for "{randomWord}"</p>
+            }
         </>
     );
 }

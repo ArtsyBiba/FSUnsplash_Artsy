@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default function ImageList({ pics, searchPhotos }) {
+export default function ImageList({ pics, searchPhotos, randomWord }) {
 
     return (
         <>    
@@ -17,7 +17,7 @@ export default function ImageList({ pics, searchPhotos }) {
                     </div>
                 ))}
         </div>
-        {pics.length > 1 &&    
+        {pics.length >= 20 && !randomWord &&    
             <button onClick={searchPhotos} className='load-button'>
                 Load more...
             </button>
