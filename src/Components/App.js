@@ -9,15 +9,17 @@ const unsplash = new Unsplash({ accessKey: process.env.REACT_APP_UNSPLASH_ACCESS
 function App() {
   const [query, setQuery] = useState('');
   const [pics, setPics] = useState([]);
+  const [firstPic, setFirstPic] = useState(1);
 
   const searchPhotos = async (e) => {
     e.preventDefault();
     unsplash.search
-        .photos(query, 1 , 20)
+        .photos(query, firstPic, 20)
         .then(toJson)
         .then((json) => {
-            setPics(json.results);
-        });
+            setPics([...pics, ...json.results]);
+        })
+        .then(setFirstPic(firstPic + 20))
   };
 
   return (
@@ -25,7 +27,7 @@ function App() {
       <div className='container'>
         <h1 className='title'>Unsplash Photo Search 🔍</h1>
         <SearchBar query={query} setQuery={setQuery} searchPhotos={searchPhotos} />
-        <ImageList pics={pics} />
+        <ImageList pics={pics} searchPhotos={searchPhotos} />
       </div>
     </div>
   );
