@@ -3,7 +3,6 @@ import Unsplash, { toJson } from 'unsplash-js';
 import './App.css';
 import SearchBar from './SearchBar';
 import ImageList from './ImageList';
-import randomWords from 'random-words';
 
 const unsplash = new Unsplash({ accessKey: process.env.REACT_APP_UNSPLASH_ACCESS_KEY });
 
@@ -11,7 +10,7 @@ function App() {
   const [query, setQuery] = useState('');
   const [pics, setPics] = useState([]);
   const [firstPic, setFirstPic] = useState(1);
-  const [randomWord, setRandomWord] = useState(null);
+  const [random, setRandom] = useState(false);
 
   const searchPhotos = async (e) => {
     e.preventDefault();
@@ -25,13 +24,13 @@ function App() {
   };
  
   const searchRandom = async () => {
-    setRandomWord(randomWords());
+    setRandom(true);
     
-    unsplash.search
-      .photos(randomWord, firstPic, 20)
+    unsplash.photos
+      .getRandomPhoto({ count: "20" })
       .then(toJson)
       .then((json) => {
-          setPics([...pics, ...json.results]);
+          setPics([...pics, ...json]);
       })
       .then(setFirstPic(firstPic + 20))
   };
@@ -40,8 +39,8 @@ function App() {
     <div className='App'>
       <div className='container'>
         <h1 className='title'>Unsplash Photo Search 🔍</h1>
-        <SearchBar query={query} pics={pics} setQuery={setQuery} searchPhotos={searchPhotos} searchRandom={searchRandom} randomWord={randomWord} />
-        <ImageList pics={pics} searchPhotos={searchPhotos} randomWord={randomWord} />
+        <SearchBar query={query} pics={pics} setQuery={setQuery} searchPhotos={searchPhotos} searchRandom={searchRandom} />
+        <ImageList pics={pics} searchRandom={searchRandom} searchPhotos={searchPhotos} random={random} />
       </div>
     </div>
   );

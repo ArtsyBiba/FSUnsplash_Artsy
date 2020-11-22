@@ -1,7 +1,7 @@
 import React from 'react';
+import Button from './Button';
 
-export default function SearchBar({ query, setQuery, searchPhotos, searchRandom, randomWord, pics }) {
-
+export default function SearchBar({ query, setQuery, searchPhotos, searchRandom }) {
     return (
         <>
             <div className='search-bar'>
@@ -17,19 +17,13 @@ export default function SearchBar({ query, setQuery, searchPhotos, searchRandom,
                     value={query}
                     onChange={(e) => setQuery(e.target.value)}
                 />
-                <button onClick={searchPhotos} className='button'>
+                <Button onClick={searchPhotos}>
                     Search
-                </button>
-                <button onClick={searchRandom} className='random-button'>
+                </Button>
+                <Button secondary onClick={searchRandom}>
                     Random Search
-                </button>
+                </Button>
             </div>
-            {pics.length < 1 && randomWord &&   
-                <p>No results for "{randomWord}" try again...</p>
-            }
-            {pics.length >= 1 && randomWord &&   
-                <p>Search results for "{randomWord}"</p>
-            }
         </>
     );
 }

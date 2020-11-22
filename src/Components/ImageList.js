@@ -1,7 +1,14 @@
 import React from 'react';
+import styled from 'styled-components';
 
-export default function ImageList({ pics, searchPhotos, randomWord }) {
+import Button from './Button';
 
+const LoadButton = styled(Button)`
+    display: block;
+    margin: 1rem auto auto auto;
+`;
+
+export default function ImageList({ pics, searchPhotos, random, searchRandom }) {
     return (
         <>    
         <div className='card-list'>
@@ -17,10 +24,15 @@ export default function ImageList({ pics, searchPhotos, randomWord }) {
                     </div>
                 ))}
         </div>
-        {pics.length >= 20 && !randomWord &&    
-            <button onClick={searchPhotos} className='load-button'>
+        {pics.length >= 20 && !random &&    
+            <LoadButton onClick={searchPhotos}>
                 Load more...
-            </button>
+            </LoadButton>
+        }
+        {pics.length >= 20 && random &&    
+            <LoadButton onClick={searchRandom}>
+                Load more...
+            </LoadButton>
         }
         </> 
     );

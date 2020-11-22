@@ -43,58 +43,6 @@
 	margin: 0.5rem 0.5rem 0.5rem 0.5rem;
 }
 
-/* buttons styling */
-.button {
-	background-color: rgba(0, 0, 0, 0.75);
-	color: white;
-	padding: 1rem 2rem;
-	border: 1px solid rgba(0, 0, 0, 0.75);
-	border-radius: 20px;
-	font-size: 1.4rem;
-	cursor: pointer;
-	transition: background-color 250ms;
-	margin: 0.5rem 0.5rem 0.5rem 0.5rem;
-}
-
-.button:hover {
-	background-color: rgba(0, 0, 0, 0.95);
-}
-
-.random-button {
-	background-color: rgba(240, 92, 6, 0.75);
-	color: white;
-	padding: 1rem 2rem;
-	border: 1px solid rgba(0, 0, 0, 0.75);
-	border-radius: 20px;
-	font-size: 1.4rem;
-	cursor: pointer;
-	transition: background-color 250ms;
-	margin: 0.5rem 0.5rem 0.5rem 0.5rem;
-}
-
-.random-button:hover {
-	background-color: rgba(240, 92, 6, 0.95);
-}
-
-.load-button {
-	background-color: rgba(0, 0, 0, 0.75);
-	color: white;
-	padding: 1rem 2rem;
-	border: 1px solid rgba(0, 0, 0, 0.75);
-	border-radius: 20px;
-	font-size: 1.4rem;
-	cursor: pointer;
-	transition: background-color 250ms;
-	display: block;
-	margin-left: auto;
-	margin-right: auto;
-	margin-top: 1rem;
-}
-
-.load-button:hover {
-	background-color: rgba(0, 0, 0, 0.95);
-}
-
 /* card styling */
 .card-list {
 	column-count: 3;
