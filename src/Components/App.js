@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import Unsplash, { toJson } from 'unsplash-js';
 import './App.css';
-import SearchBar from './SearchBar';
-import ImageList from './ImageList';
+
+import SearchBar from './Search/SearchBar';
+import ImageList from './Photos/ImageList';
+import Title from './Title'
 
 const unsplash = new Unsplash({ accessKey: process.env.REACT_APP_UNSPLASH_ACCESS_KEY });
 
@@ -38,7 +40,7 @@ function App() {
   return (
     <div className='App'>
       <div className='container'>
-        <h1 className='title'>Unsplash Photo Search 🔍</h1>
+        <Title>Unsplash Photo Search 🔍</Title>
         <SearchBar query={query} pics={pics} setQuery={setQuery} searchPhotos={searchPhotos} searchRandom={searchRandom} />
         <ImageList pics={pics} searchRandom={searchRandom} searchPhotos={searchPhotos} random={random} />
       </div>

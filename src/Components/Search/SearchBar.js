@@ -1,14 +1,16 @@
 import React from 'react';
+
 import Button from './Button';
+import Label from './Label';
+import SearchBox from './SearchBox';
+import SearchInput from './SearchInput';
 
 export default function SearchBar({ query, setQuery, searchPhotos, searchRandom }) {
     return (
         <>
-            <div className='search-bar'>
-                <label className='label' htmlFor='query'> 
-                    📷
-                </label>
-                <input
+            <SearchBox>
+                <Label> 📷 </Label>
+                <SearchInput
                     type='text'
                     data-testid='search-input'
                     name='query'
@@ -23,7 +25,7 @@ export default function SearchBar({ query, setQuery, searchPhotos, searchRandom 
                 <Button secondary onClick={searchRandom}>
                     Random Search
                 </Button>
-            </div>
+            </SearchBox>
         </>
     );
 }

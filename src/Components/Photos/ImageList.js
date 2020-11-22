@@ -1,7 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import Button from './Button';
+import Button from '../Search/Button';
+import PhotoBoard from './PhotoBoard';
+import ImageCard from './ImageCard';
+import Image from './Image';
 
 const LoadButton = styled(Button)`
     display: block;
@@ -11,19 +14,16 @@ const LoadButton = styled(Button)`
 export default function ImageList({ pics, searchPhotos, random, searchRandom }) {
     return (
         <>    
-        <div className='card-list'>
-                {pics.map((pic) => (
-                    <div className='card' key={pic.id}>
-                        <img
-                            className='card--image'
-                            alt={pic.alt_description}
-                            src={pic.urls.regular}
-                            width='50%'
-                            height='50%'
-                        ></img>
-                    </div>
-                ))}
-        </div>
+        <PhotoBoard>
+            {pics.map((pic) => (
+                <ImageCard key={pic.id}>
+                    <Image
+                        alt={pic.alt_description}
+                        src={pic.urls.regular}
+                    />
+                </ImageCard>
+            ))}
+        </PhotoBoard>
         {pics.length >= 20 && !random &&    
             <LoadButton onClick={searchPhotos}>
                 Load more...
