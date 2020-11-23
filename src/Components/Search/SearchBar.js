@@ -5,7 +5,17 @@ import Label from './Label';
 import SearchBox from './SearchBox';
 import SearchInput from './SearchInput';
 
-export default function SearchBar({ query, setQuery, searchPhotos, searchRandom }) {
+export default function SearchBar({ query, setQuery, searchPhotos, searchRandom, setLoading }) {
+    const handleSearchPhotos = (e) => {
+        setLoading(true);
+        setTimeout(() => searchPhotos(e), 1000);
+    };
+
+    const handleSearchRandom = () => {
+        setLoading(true);
+        setTimeout(() => searchRandom(), 1000);
+    };
+    
     return (
         <>
             <SearchBox>
@@ -19,10 +29,10 @@ export default function SearchBar({ query, setQuery, searchPhotos, searchRandom 
                     value={query}
                     onChange={(e) => setQuery(e.target.value)}
                 />
-                <Button onClick={searchPhotos}>
+                <Button onClick={handleSearchPhotos}>
                     Search
                 </Button>
-                <Button secondary onClick={searchRandom}>
+                <Button secondary onClick={handleSearchRandom}>
                     Random Search
                 </Button>
             </SearchBox>

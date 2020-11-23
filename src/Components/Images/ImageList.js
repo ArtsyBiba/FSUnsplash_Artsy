@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 import Button from '../Search/Button';
-import PhotoBoard from './PhotoBoard';
+import ImageBoard from './ImageBoard';
 import ImageCard from './ImageCard';
 import Image from './Image';
 
@@ -14,7 +14,7 @@ const LoadButton = styled(Button)`
 export default function ImageList({ pics, searchPhotos, random, searchRandom }) {
     return (
         <>    
-        <PhotoBoard>
+        <ImageBoard>
             {pics.map((pic) => (
                 <ImageCard key={pic.id}>
                     <Image
@@ -23,7 +23,7 @@ export default function ImageList({ pics, searchPhotos, random, searchRandom }) 
                     />
                 </ImageCard>
             ))}
-        </PhotoBoard>
+        </ImageBoard>
         {pics.length >= 20 && !random &&    
             <LoadButton onClick={searchPhotos}>
                 Load more...

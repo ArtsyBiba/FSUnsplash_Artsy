@@ -11,6 +11,7 @@
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-infinite-scroll-component": "^5.1.0",
+    "react-loader-spinner": "^3.1.14",
     "react-scripts": "^4.0.0",
     "react-unsplash-grid-gallery": "^1.0.1",
     "styled-components": "^5.2.1",
