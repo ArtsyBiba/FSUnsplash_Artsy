@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import Unsplash, { toJson } from 'unsplash-js';
+import { toJson } from 'unsplash-js';
 
 import Button from '../Search/Button';
 import ImageBoard from './ImageBoard';
@@ -12,30 +12,25 @@ const LoadButton = styled(Button)`
     margin: 1rem auto auto auto;
 `;
 
-export default function ImageList({ pics, random, setRandom, unsplash, query, firstPic, setFirstPic, setPics }) {
-    const handleMoreSearchPhotos = async (e) => {
-        e.preventDefault();
-        setRandom(false);
+export default function ImageList({ pics, random, unsplash, query, firstPic, setFirstPic, setPics }) {
+    const handleMoreSearch = async (e) => {
+        if (!random) { 
+            e.preventDefault();
     
-        unsplash.search
-            .photos(query, firstPic, 20)
-            .then(toJson)
-            .then((json) => {
-                setPics([...pics, ...json.results]);
-            })
-            .then(setFirstPic(firstPic + 20))
-    };
-    
-    const handleMoreSearchRandom = async () => {
-        setRandom(true);
-
-        unsplash.photos
-            .getRandomPhoto({ count: "20" })
-            .then(toJson)
-            .then((json) => {
-                setPics([...pics, ...json]);
-            })
-            .then(setFirstPic(firstPic + 20))
+            unsplash.search
+                .photos(query, firstPic, 20)
+                .then(toJson)
+                .then((json) => {
+                    setPics([...pics, ...json.results]);
+                })
+                .then(setFirstPic(firstPic + 20))
+        } else unsplash.photos
+                .getRandomPhoto({ count: "20" })
+                .then(toJson)
+                .then((json) => {
+                    setPics([...pics, ...json]);
+                })
+                .then(setFirstPic(firstPic + 20))
     };
     
     return (
@@ -51,12 +46,12 @@ export default function ImageList({ pics, random, setRandom, unsplash, query, fi
             ))}
         </ImageBoard>
         {pics.length >= 20 && !random &&    
-            <LoadButton onClick={handleMoreSearchPhotos}>
+            <LoadButton onClick={handleMoreSearch}>
                 Load more...
             </LoadButton>
         }
         {pics.length >= 20 && random &&    
-            <LoadButton onClick={handleMoreSearchRandom}>
+            <LoadButton onClick={handleMoreSearch}>
                 Load more...
             </LoadButton>
         }
