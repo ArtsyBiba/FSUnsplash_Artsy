@@ -8,14 +8,14 @@ import SearchInput from './SearchInput';
 export default function SearchBar({ query, setQuery, searchPhotos, searchRandom, setLoading }) {
     const handleSearchPhotos = (e) => {
         setLoading(true);
-        setTimeout(() => searchPhotos(e), 1000);
+        setTimeout(() => searchPhotos(e), 500);
     };
 
     const handleSearchRandom = () => {
         setLoading(true);
-        setTimeout(() => searchRandom(), 1000);
+        setTimeout(() => searchRandom(), 500);
     };
-    
+
     return (
         <>
             <SearchBox>
@@ -29,10 +29,10 @@ export default function SearchBar({ query, setQuery, searchPhotos, searchRandom,
                     value={query}
                     onChange={(e) => setQuery(e.target.value)}
                 />
-                <Button onClick={handleSearchPhotos}>
+                <Button data-testid='search-button' onClick={handleSearchPhotos}>
                     Search
                 </Button>
-                <Button secondary onClick={handleSearchRandom}>
+                <Button data-testid='random-search-button' secondary onClick={handleSearchRandom}>
                     Random Search
                 </Button>
             </SearchBox>

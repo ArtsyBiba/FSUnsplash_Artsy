@@ -18,12 +18,13 @@ function App() {
 
   const searchPhotos = async (e) => {
     e.preventDefault();
+    setRandom(false);
 
     unsplash.search
         .photos(query, firstPic, 20)
         .then(toJson)
         .then((json) => {
-            setPics([...pics, ...json.results]);
+          setPics(json.results);
         })
         .then(setFirstPic(firstPic + 20))
         .then(setLoading(false))
@@ -31,12 +32,12 @@ function App() {
  
   const searchRandom = async () => {
     setRandom(true);
-    
+
     unsplash.photos
       .getRandomPhoto({ count: "20" })
       .then(toJson)
       .then((json) => {
-        setPics([...pics, ...json]);
+        setPics(json);
       })
       .then(setFirstPic(firstPic + 20))
       .then(setLoading(false))
@@ -47,9 +48,9 @@ function App() {
       <div className='container'>
         <Title>Unsplash Photo Search 🔍</Title>
         <SearchBar query={query} setLoading={setLoading} pics={pics} setQuery={setQuery} searchPhotos={searchPhotos} searchRandom={searchRandom} />
-        <ImageList pics={pics} searchRandom={searchRandom} searchPhotos={searchPhotos} random={random} />
-        {loading &&
-          <LoaderSpinner type="ThreeDots" color="black" height={100} width={100} />
+        {loading
+          ? <LoaderSpinner type="ThreeDots" color="black" height={100} width={100} />
+          : <ImageList pics={pics} setPics={setPics} searchPhotos={searchPhotos} random={random} unsplash={unsplash} setRandom={setRandom} query={query} firstPic={firstPic} setFirstPic={setFirstPic} />
         }
       </div>
     </div>
