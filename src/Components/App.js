@@ -16,41 +16,37 @@ function App() {
   const [random, setRandom] = useState(false);
   const [loading, setLoading] = useState(false);
 
-  const searchPhotos = async (e) => {
-    e.preventDefault();
-    setRandom(false);
-
-    unsplash.search
-        .photos(query, firstPic, 20)
-        .then(toJson)
-        .then((json) => {
-          setPics(json.results);
-        })
-        .then(setFirstPic(firstPic + 20))
-        .then(setLoading(false))
-  };
- 
-  const searchRandom = async () => {
-    setRandom(true);
-
-    unsplash.photos
-      .getRandomPhoto({ count: "20" })
-      .then(toJson)
-      .then((json) => {
-        setPics(json);
-      })
-      .then(setFirstPic(firstPic + 20))
-      .then(setLoading(false))
-  };
-
   return (
     <div className='App'>
       <div className='container'>
         <Title>Unsplash Photo Search 🔍</Title>
-        <SearchBar query={query} setLoading={setLoading} pics={pics} setQuery={setQuery} searchPhotos={searchPhotos} searchRandom={searchRandom} />
+        <SearchBar 
+          query={query} 
+          setQuery={setQuery}
+          setLoading={setLoading} 
+          pics={pics}
+          setPics={setPics} 
+          random={random}
+          unsplash={unsplash}
+          setRandom={setRandom} 
+          firstPic={firstPic} 
+          setFirstPic={setFirstPic} 
+        />
         {loading
-          ? <LoaderSpinner type="ThreeDots" color="black" height={100} width={100} />
-          : <ImageList pics={pics} setPics={setPics} searchPhotos={searchPhotos} random={random} unsplash={unsplash} setRandom={setRandom} query={query} firstPic={firstPic} setFirstPic={setFirstPic} />
+          ? <LoaderSpinner 
+              type="ThreeDots" 
+              color="black" 
+              height={100} 
+              width={100} 
+            />
+          : <ImageList 
+              pics={pics} 
+              setPics={setPics} 
+              unsplash={unsplash} 
+              query={query} 
+              firstPic={firstPic} 
+              setFirstPic={setFirstPic} 
+            />
         }
       </div>
     </div>

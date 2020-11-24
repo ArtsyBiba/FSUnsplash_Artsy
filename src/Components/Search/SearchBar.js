@@ -1,19 +1,43 @@
 import React from 'react';
+import { toJson } from 'unsplash-js';
 
 import Button from './Button';
 import Label from './Label';
 import SearchBox from './SearchBox';
 import SearchInput from './SearchInput';
 
-export default function SearchBar({ query, setQuery, searchPhotos, searchRandom, setLoading }) {
+export default function SearchBar({ query, setQuery, setLoading, setRandom, setPics, unsplash, setFirstPic, firstPic }) {
     const handleSearchPhotos = (e) => {
+        e.preventDefault();
         setLoading(true);
-        setTimeout(() => searchPhotos(e), 500);
+        setRandom(false);
+        
+        setTimeout(() => 
+            unsplash.search
+                .photos(query, firstPic, 20)
+                .then(toJson)
+                .then((json) => {
+                    setPics(json.results);
+                })
+                .then(setFirstPic(firstPic + 20))
+                .then(setLoading(false))
+            , 500)
     };
 
     const handleSearchRandom = () => {
         setLoading(true);
-        setTimeout(() => searchRandom(), 500);
+        setRandom(true);
+        
+        setTimeout(() => 
+            unsplash.photos
+                .getRandomPhoto({ count: "20" })
+                .then(toJson)
+                .then((json) => {
+                    setPics(json);
+                })
+                .then(setFirstPic(firstPic + 20))
+                .then(setLoading(false))
+        , 500);
     };
 
     return (
