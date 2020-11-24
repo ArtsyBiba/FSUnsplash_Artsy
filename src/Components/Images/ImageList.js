@@ -12,7 +12,7 @@ const LoadButton = styled(Button)`
     margin: 1rem auto auto auto;
 `;
 
-export default function ImageList({ pics, random, unsplash, query, firstPic, setFirstPic, setPics }) {
+export default function ImageList({ pics, setPics, random, unsplash, query, firstPic, setFirstPic }) {
     const handleMoreSearch = async (e) => {
         if (!random) { 
             e.preventDefault();
