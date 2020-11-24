@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { toJson } from 'unsplash-js';
 
 import Button from './Button';
@@ -7,21 +7,25 @@ import SearchBox from './SearchBox';
 import SearchInput from './SearchInput';
 
 export default function SearchBar({ query, setQuery, setLoading, setRandom, setPics, unsplash, setFirstPic, firstPic }) {
-    const handleSearchPhotos = (e) => {
-        e.preventDefault();
-        setLoading(true);
-        setRandom(false);
-        
-        setTimeout(() => 
-            unsplash.search
-                .photos(query, firstPic, 20)
-                .then(toJson)
-                .then((json) => {
-                    setPics(json.results);
-                })
-                .then(setFirstPic(firstPic + 20))
-                .then(setLoading(false))
-            , 500)
+    useEffect(() => {
+        setFirstPic(1);
+    }, [query]);
+    
+    const handleSearchPhotos = () => {
+        if (query) {
+            setLoading(true);
+            setRandom(false);
+            
+            setTimeout(() => 
+                unsplash.search
+                    .photos(query, firstPic, 20)
+                    .then(toJson)
+                    .then((json) => {
+                        setPics(json.results);
+                    })
+                    .then(setFirstPic(firstPic + 20))
+                    .then(setLoading(false)), 500)
+        };
     };
 
     const handleSearchRandom = () => {
@@ -36,8 +40,7 @@ export default function SearchBar({ query, setQuery, setLoading, setRandom, setP
                     setPics(json);
                 })
                 .then(setFirstPic(firstPic + 20))
-                .then(setLoading(false))
-        , 500);
+                .then(setLoading(false)), 500);
     };
 
     return (

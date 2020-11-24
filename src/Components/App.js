@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import Unsplash, { toJson } from 'unsplash-js';
+import Unsplash from 'unsplash-js';
 import './App.css';
 
 import SearchBar from './Search/SearchBar';
@@ -43,6 +43,7 @@ function App() {
               pics={pics} 
               setPics={setPics} 
               unsplash={unsplash} 
+              random={random}
               query={query} 
               firstPic={firstPic} 
               setFirstPic={setFirstPic} 
