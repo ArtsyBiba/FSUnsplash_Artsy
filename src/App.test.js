@@ -1,25 +1,9 @@
 import React from 'react';
-import { render, fireEvent } from '@testing-library/react'
+import ReactDOM from 'react-dom';
 
-import SearchBar from './Components/Search/SearchBar';
+import App from './Components/App';
 
-// tests fro search bar
-it('renders correctly', () => {
-  const { queryByTestId, queryByPlaceholderText } = render(<SearchBar/>);
-
-  expect(queryByTestId('search-button')).toBeTruthy();
-  expect(queryByTestId('random-search-button')).toBeTruthy();
-  expect(queryByPlaceholderText('Try "fancy cars" or "cute animals"')).toBeTruthy();
-})
-
-describe('Input Value', () => {
-  it('updates on change', () => {
-    const { queryByPlaceholderText } = render(<SearchBar/>);
-
-    const searchInput = queryByPlaceholderText('Try "fancy cars" or "cute animals"');
-
-    fireEvent.change(searchInput, { target: { value: 'test' }});
-
-    expect(searchInput.value).toBe('test');
-  })
-})
+it('renders without crashing', () => {
+  const div = document.createElement('div');
+  ReactDOM.render(<App />, div);
+});
