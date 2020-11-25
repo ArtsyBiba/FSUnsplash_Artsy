@@ -48,12 +48,12 @@ export default function ImageList({ pics, setPics, random, unsplash, query, firs
             ))}
         </ImageBoard>
         {pics.length >= 20 && !random &&    
-            <LoadButton onClick={handleMoreSearchPhotos}>
+            <LoadButton onClick={handleMoreSearchPhotos} data-testid='search-more-button'>
                 Load more...
             </LoadButton>
         }
         {pics.length >= 20 && random &&    
-            <LoadButton onClick={handleMoreSearchRandom} secondary>
+            <LoadButton onClick={handleMoreSearchRandom} secondary data-testid='random-search-more-button'>
                 Load more...
             </LoadButton>
         }

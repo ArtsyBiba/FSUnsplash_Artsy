@@ -6,7 +6,7 @@ import App from '../App';
 
 // ensure that all components render correctly
 it('renders correctly', () => {
-  const { queryByTestId, queryByPlaceholderText } = render(<SearchBar />);
+  const { queryByTestId, queryByPlaceholderText } = render(<App />);
 
   expect(queryByTestId('search-button')).toBeTruthy();
   expect(queryByTestId('random-search-button')).toBeTruthy();
@@ -26,38 +26,22 @@ describe('Input Value', () => {
 });
 
 // ensure that search photos button works
-// describe('search photos button', () => {
-//   describe('with empty query', () => {
-//     it('does not trigger handleSearchPhotos function', () => {
-//       const requestSearchPhotos = jest.fn();
-//       const { queryByTestId } = render(<App />);
+describe('search photos button', () => {
+    it('triggers handleSearchPhotos function', () => {
+      const handleSearchPhotos = jest.fn();  
+      const { queryByTestId } = render(<App handleSearchPhotos={handleSearchPhotos()} />);    
 
-//       fireEvent.click(queryByTestId('search-button'));
+      fireEvent.click(queryByTestId('search-button'));
 
-//       expect(requestSearchPhotos).not.toHaveBeenCalled();
-//     });
-//   });
+      expect(handleSearchPhotos).toHaveBeenCalled();
+    });
+});
 
-//   describe('with data inside query', () => {
-//     it('triggers handleSearchPhotos function', () => {
-//       const requestSearchPhotos = jest.fn();  
-//       const { queryByTestId, queryByPlaceholderText } = render(<App />);    
-//       const searchInput = queryByPlaceholderText('Try "fancy cars" or "cute animals"'); 
-
-//       fireEvent.change(searchInput, { target: { value: 'test' }});
-//       fireEvent.click(queryByTestId('search-button'));
-
-//       expect(requestSearchPhotos).toHaveBeenCalled();
-//     });
-//   });
-// });
-
-// ensure that search photos button works
-
+// ensure that random search button works
 describe('search random button', () => {
   it('does trigger handleSearchRandom function', () => {
     const handleSearchRandom = jest.fn();
-    const { queryByTestId } = render(<SearchBar handleSearchRandom={handleSearchRandom} />);
+    const { queryByTestId } = render(<App handleSearchRandom={handleSearchRandom()} />);
 
     fireEvent.click(queryByTestId('random-search-button'));
 
