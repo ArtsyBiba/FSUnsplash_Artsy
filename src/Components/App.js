@@ -4,8 +4,8 @@ import './App.css';
 
 import SearchBar from './Search/SearchBar';
 import ImageList from './Images/ImageList';
-import Title from './Title'
-import LoaderSpinner from './LoaderSpinner'
+import Title from './Title';
+import LoaderSpinner from './Animation/LoaderSpinner';
 
 const unsplash = new Unsplash({ accessKey: process.env.REACT_APP_UNSPLASH_ACCESS_KEY });
 
@@ -38,6 +38,7 @@ function App() {
               color="black" 
               height={100} 
               width={100} 
+              data-testid='loader-spinner'
             />
           : <ImageList 
               pics={pics} 
@@ -47,6 +48,7 @@ function App() {
               query={query} 
               firstPic={firstPic} 
               setFirstPic={setFirstPic} 
+              data-testid='image-list'
             />
         }
       </div>
